@@ -6,9 +6,9 @@ Welcome to this project
 <p> All screenshots</p>
 <img src="screenshot/one.jpg" width="500"/>
 
-<img src="stack_food_project/screenshot/two.jpg" width="500"/>
+<img src="screenshot/two.jpg" width="500"/>
 
-<img src="stack_food_project/screenshot/three.jpg" width="500"/>
+<img src="screenshot/three.jpg" width="500"/>
 
 </body>
 </html>
