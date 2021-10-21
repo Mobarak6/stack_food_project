@@ -51,7 +51,7 @@ class FoodInfoWidget extends StatelessWidget {
           ),
         ),
         RatingBar.builder(
-          initialRating: 3,
+          initialRating: 5,
           minRating: 1,
           direction: Axis.horizontal,
           allowHalfRating: true,
@@ -103,7 +103,10 @@ class FoodInfoWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              SvgPicture.asset('lib/assets/popular_nearby/add.svg')
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: SvgPicture.asset('lib/assets/popular_nearby/add.svg'),
+              )
             ],
           ),
         )

@@ -8,4 +8,5 @@ class AppColor {
   static const Color lebelStack = Color(0xff00cf46);
   static const Color popUpUnselected = Color(0xff9B9B9B);
   static const Color unselectItem = Color(0xffB5B5B5);
+  static const Color appBartitleText = Color(0xffB2B2B2);
 }

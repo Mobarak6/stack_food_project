@@ -16,48 +16,6 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
-  // List<Widget> widgetList() {
-  //   return [
-  //     InkWell(
-  //       onTap: () {
-  //         // Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-  //       },
-  //       child: SvgPicture.asset('lib/assets/icons/home.svg'),
-  //     ),
-  //     InkWell(
-  //       onTap: () {
-  //         //Navigator.of(context).pushReplacementNamed(FavoritScreen.routeName);
-  //       },
-  //       child: SvgPicture.asset('lib/assets/icons/hart.svg'),
-  //     ),
-  //     Container(
-  //       height: 58,
-  //       width: 58,
-  //       decoration: BoxDecoration(
-  //           color: Color.fromRGBO(239, 120, 34, 1),
-  //           shape: BoxShape.circle,
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Color.fromRGBO(0, 0, 0, 0.08), //edited
-  //               spreadRadius: 0,
-  //               blurRadius: 4,
-  //               offset: Offset(0, -3), //edited
-  //             ),
-  //           ]),
-  //       child: Padding(
-  //         padding: const EdgeInsets.all(18),
-  //         child: SvgPicture.asset(
-  //           'lib/assets/icons/shopping_cart.svg',
-  //         ),
-  //       ),
-  //     ) // Icon(Icons.shop),
-
-  //     ,
-  //     SvgPicture.asset('lib/assets/icons/bookMark.svg'),
-  //     SvgPicture.asset('lib/assets/icons/menu.svg')
-  //   ];
-  // }
-
   int _currentIndex = 0;
   void _onTop(int index) {
     setState(() {
@@ -78,44 +36,39 @@ class _TabScreenState extends State<TabScreen> {
         : AppColor.unselectItem;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _list.elementAt(_currentIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        // selectedItemColor: AppColor.viewButtonTextColor,
+  Widget get bottomWidget {
+    return Container(
+      height: 60,
+      margin: EdgeInsets.only(top: 3),
+      child: BottomNavigationBar(
+        backgroundColor: Colors.white,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        // unselectedItemColor: Color(0xffB5B5B5),
-
         elevation: 10,
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-              label: '',
+              label: 'Home',
               icon: SvgPicture.asset(
                 'lib/assets/icons/home.svg',
-                color: _currentIndex == 0
-                    ? AppColor.viewButtonTextColor
-                    : AppColor.unselectItem,
+                color: currentColor(0),
               )),
           BottomNavigationBarItem(
-            label: '',
+            label: 'Favorite',
             icon: SvgPicture.asset(
               'lib/assets/icons/hart.svg',
-              color: _currentIndex == 1
-                  ? AppColor.viewButtonTextColor
-                  : AppColor.unselectItem,
+              color: currentColor(1),
             ),
           ),
           BottomNavigationBarItem(
-            label: '',
-            // icon: SvgPicture.asset('lib/assets/icons/shopping_cart.svg'),
+            label: 'Shop',
             icon: Container(
-              height: 50,
-              width: 50,
+              height: 58,
+              width: 58,
               decoration: BoxDecoration(
-                  color: AppColor.viewButtonTextColor,
+                  color: _currentIndex == 2
+                      ? Colors.white
+                      : AppColor.viewButtonTextColor,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
@@ -125,8 +78,8 @@ class _TabScreenState extends State<TabScreen> {
                       offset: Offset(0, -3), //edited
                     ),
                   ]),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              child: Container(
+                margin: EdgeInsets.all(15),
                 child: SvgPicture.asset(
                   'lib/assets/icons/shopping_cart.svg',
                   color: _currentIndex == 2
@@ -137,40 +90,30 @@ class _TabScreenState extends State<TabScreen> {
             ),
           ),
           BottomNavigationBarItem(
-              label: '',
+              label: 'Cart',
               icon: SvgPicture.asset(
                 'lib/assets/icons/bookMark.svg',
                 color: currentColor(3),
               )),
           BottomNavigationBarItem(
-              label: '',
+              label: 'Profile',
               icon: SvgPicture.asset(
                 'lib/assets/icons/menu.svg',
                 color: currentColor(4),
               )),
         ],
         currentIndex: _currentIndex,
+        selectedFontSize: 0,
         onTap: _onTop,
       ),
-      // bottomNavigationBar: Container(
-      //   decoration: BoxDecoration(
-      //     color: Colors.white,
-      //     boxShadow: [
-      //       BoxShadow(
-      //         color: Color.fromRGBO(0, 0, 0, 0.1),
+    );
+  }
 
-      //         spreadRadius: 0,
-      //         blurRadius: 10,
-      //         offset: Offset(0, -3), // changes position of shadow
-      //       ),
-      //     ],
-      //   ),
-      //   height: 60,
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //     children: widgetList(),
-      //   ),
-      // ),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _list.elementAt(_currentIndex),
+      bottomNavigationBar: bottomWidget,
     );
   }
 }

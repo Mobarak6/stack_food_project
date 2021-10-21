@@ -4,6 +4,7 @@ import 'package:stack_food/model/food.dart';
 import 'package:stack_food/model/restaurants.dart';
 
 class DataList with ChangeNotifier {
+  int i = 0;
   //All category list
   List<Categories> _categorisList = [
     Categories('All', "lib/assets/categoris/fast-food.svg"),
@@ -12,6 +13,7 @@ class DataList with ChangeNotifier {
     Categories('Fast Food', "lib/assets/categoris/burger.svg"),
     Categories('Cake', "lib/assets/categoris/muffin.svg"),
     Categories('Sushi', "lib/assets/categoris/cola.svg"),
+
     //no need to call notifyListener
   ];
   //acess for category list
@@ -71,6 +73,7 @@ class DataList with ChangeNotifier {
       DateTime.now(),
       'fast food',
     ),
+
     Restaurant(
       'Starbuks',
       'American cuisine',
@@ -91,6 +94,7 @@ class DataList with ChangeNotifier {
       DateTime(2020),
       'fast food',
     ),
+
     Restaurant(
       'Dominos',
       'American cuisine',
@@ -101,6 +105,40 @@ class DataList with ChangeNotifier {
       DateTime(2020),
       'fast food',
     ),
+    for (int i = 0; i < 50; i++)
+      Restaurant(
+        'Starbuks',
+        'American cuisine',
+        'lib/assets/popularRestaurants/starbuks.png',
+        null,
+        '76A eighth evenue, New York, US',
+        2,
+        DateTime(2020),
+        'fast food',
+      ),
+    for (int i = 0; i < 100; i++)
+      Restaurant(
+        'Mc Donald\'s',
+        'New York, US',
+        'lib/assets/foodCampaign/cake.png',
+        '50% off',
+        '76A eighth evenue, ',
+        3,
+        DateTime(2020),
+        'fast food',
+      ),
+    for (int i = 0; i < 42; i++)
+      Restaurant(
+        'Hungry Puppets',
+        'American cuisine',
+        'lib/assets/popularRestaurants/benar1.png',
+        null,
+        '76A eighth evenue, New York, US',
+        1,
+        DateTime.now(),
+        'fast food',
+      ),
+
     //no need to call notifyListener
   ];
 

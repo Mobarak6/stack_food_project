@@ -28,7 +28,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
       'lib/assets/sliderAssets/slide_3.png',
     ];
     return Container(
-      margin: EdgeInsets.only(top: 27),
+      // margin: EdgeInsets.only(top: 27),
       child: Column(
         children: [
           CarouselSlider(

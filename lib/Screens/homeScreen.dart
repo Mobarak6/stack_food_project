@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:stack_food/model/Colors.dart';
@@ -21,8 +23,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(
@@ -31,18 +31,19 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: AppColor.BackgroundColor,
         body: Column(
           children: [
-            SearchBox(screenSize: screenSize),
+            SearchBox(),
             Expanded(
               child: SingleChildScrollView(
+                physics: ScrollPhysics(),
                 child: Column(
                   children: [
                     CarouselSliderWidget(),
                     CategoriesWidget(),
-                    NearbyFoood(screenSize: screenSize),
+                    NearbyFoood(),
                     FoodCampain(),
                     PopularRestaurants(),
                     NewRestaurants(),
-                    AllRestaurants(screenSize: screenSize),
+                    AllRestaurants(),
                   ],
                 ),
               ),

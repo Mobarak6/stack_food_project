@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,10 +11,7 @@ import 'package:stack_food/widgets/leadingLebel.dart';
 class AllRestaurants extends StatelessWidget {
   const AllRestaurants({
     Key? key,
-    required this.screenSize,
   }) : super(key: key);
-
-  final Size screenSize;
 
   dynamic popUpMenuList(BuildContext context) {
     var list = <PopupMenuEntry<Object>>[];
@@ -90,138 +89,135 @@ class AllRestaurants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<DataList>(builder: (context, snapshot, _) {
-      return Container(
-        height: screenSize.height * 0.37,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 17,
-                right: 16,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'All Restaurants',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      Text(
-                        '${snapshot.restaurantList.length}+ ' + 'Near you',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 10,
-                          color: AppColor.popUpUnselected,
-                        ),
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    onTapUp: (TapUpDetails details) {
-                      _showPopupMenu(details.globalPosition, context);
-                    },
-                    child: SvgPicture.asset('lib/assets/icons/menuPopup.svg'),
-                  ),
-                ],
-              ),
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 17,
+              right: 16,
             ),
-            Expanded(
-              child: ListView.builder(
-                  // scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, item) {
-                    return Column(
-                      children: [
-                        Container(
-                          height: 80,
-                          child: ListTile(
-                            leading: Stack(
-                              children: [
-                                Container(
-                                  height: 65,
-                                  width: 83,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      snapshot.restaurantList[item]
-                                          .coverPageImageUrl,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                snapshot.restaurantList[item].discount != null
-                                    ? Positioned(
-                                        top: 5,
-                                        left: -5,
-                                        child: LeadingLebel(
-                                            title: snapshot
-                                                .restaurantList[item].discount))
-                                    : SizedBox(),
-                              ],
-                            ),
-                            trailing: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'All Restaurants',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    Text(
+                      '${snapshot.restaurantList.length}+ ' + 'Near you',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 10,
+                        color: AppColor.popUpUnselected,
+                      ),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTapUp: (TapUpDetails details) {
+                    _showPopupMenu(details.globalPosition, context);
+                  },
+                  child: SvgPicture.asset('lib/assets/icons/menuPopup.svg'),
+                ),
+              ],
+            ),
+          ),
+          ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: snapshot.restaurantList.length,
+              itemBuilder: (context, item) {
+                return Column(
+                  children: [
+                    Container(
+                      height: 80,
+                      child: ListTile(
+                        leading: Stack(
+                          children: [
+                            Container(
                               height: 65,
-                              child: SvgPicture.asset(
-                                'lib/assets/icons/listTileFav.svg',
+                              width: 83,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  snapshot
+                                      .restaurantList[item].coverPageImageUrl,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                            title: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            snapshot.restaurantList[item].discount != null
+                                ? Positioned(
+                                    top: 5,
+                                    left: -6,
+                                    child: LeadingLebel(
+                                        title: snapshot
+                                            .restaurantList[item].discount))
+                                : SizedBox(),
+                          ],
+                        ),
+                        trailing: Container(
+                          height: 65,
+                          child: SvgPicture.asset(
+                            'lib/assets/icons/listTileFav.svg',
+                          ),
+                        ),
+
+                        //FavoriteButton(),
+                        title: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              snapshot.restaurantList[item].restaurantName,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                            Text(
+                              snapshot.restaurantList[item].discription +
+                                  '\n' +
+                                  snapshot.restaurantList[item].type,
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Poppins',
+                                color: Color(0xff888888),
+                              ),
+                            ),
+                            Row(
                               children: [
-                                Text(
-                                  snapshot.restaurantList[item].restaurantName,
-                                  style: Theme.of(context).textTheme.bodyText2,
-                                ),
-                                Text(
-                                  snapshot.restaurantList[item].discription +
-                                      '\n' +
-                                      snapshot.restaurantList[item].type,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xff888888),
+                                RatingBar.builder(
+                                  initialRating: 5,
+                                  minRating: 1,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemPadding: EdgeInsets.zero,
+                                  itemSize: 9,
+                                  itemBuilder: (context, _) => SvgPicture.asset(
+                                    'lib/assets/popular_nearby/star.svg',
+                                    color: Color(0xffEF7822),
                                   ),
-                                ),
-                                Row(
-                                  children: [
-                                    RatingBar.builder(
-                                      initialRating: 5,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding: EdgeInsets.zero,
-                                      itemSize: 9,
-                                      itemBuilder: (context, _) =>
-                                          SvgPicture.asset(
-                                        'lib/assets/popular_nearby/star.svg',
-                                        color: Color(0xffEF7822),
-                                      ),
-                                      onRatingUpdate: (rating) {},
-                                    ),
-                                  ],
+                                  onRatingUpdate: (rating) {},
                                 ),
                               ],
                             ),
-                          ),
+                          ],
                         ),
-                        Divider(
-                          color: Color(0xffE2E2E2),
-                          height: 1,
-                        )
-                      ],
-                    );
-                  }),
-            ),
-          ],
-        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Color(0xffE2E2E2),
+                      height: 1,
+                    )
+                  ],
+                );
+              }),
+        ],
       );
     });
   }

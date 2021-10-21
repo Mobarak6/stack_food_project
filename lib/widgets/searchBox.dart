@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stack_food/model/Colors.dart';
 
 class SearchBox extends StatelessWidget {
-  final Size screenSize;
   const SearchBox({
     Key? key,
-    required this.screenSize,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 48,
-      margin:
-          EdgeInsets.only(left: 17, right: 16, top: screenSize.height * 0.035),
+      margin: EdgeInsets.only(left: 17, right: 16, top: 20, bottom: 27),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -29,7 +27,12 @@ class SearchBox extends StatelessWidget {
       child: TextField(
         onChanged: (value) {},
         decoration: InputDecoration(
-          hintStyle: TextStyle(fontSize: 12, color: AppColor.popUpUnselected),
+          hintStyle: TextStyle(
+            fontSize: 12,
+            color: AppColor.popUpUnselected,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w400,
+          ),
           hintText: 'Search food or restaurent here...',
           suffixIcon: Icon(
             Icons.search,

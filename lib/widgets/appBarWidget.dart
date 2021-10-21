@@ -25,6 +25,7 @@ class AppbarWidget extends StatelessWidget {
                       fontSize: 12,
                       color: Color(0xffB2B2B2),
                       fontFamily: 'Poppings',
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
