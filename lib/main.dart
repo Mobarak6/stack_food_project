@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stack_food/Screens/cartScreen.dart';
-import 'package:stack_food/Screens/favoritScreen.dart';
-import 'package:stack_food/Screens/homeScreen.dart';
-import 'package:stack_food/Screens/orderScreen.dart';
-import 'package:stack_food/Screens/profileScreen.dart';
+
 import 'package:stack_food/Screens/tabScreen.dart';
 import 'package:stack_food/model/Colors.dart';
 
@@ -81,13 +77,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: TabScreen(),
-        routes: {
-          HomeScreen.routeName: (context) => HomeScreen(),
-          FavoritScreen.routeName: (context) => FavoritScreen(),
-          CartScreen.routeName: (context) => CartScreen(),
-          OrderScreen.routeName: (context) => OrderScreen(),
-          ProfileScreen.routeName: (context) => ProfileScreen(),
-        },
       ),
     );
   }
